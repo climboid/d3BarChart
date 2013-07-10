@@ -11,20 +11,19 @@ angular.module('d3BarApp')
     			// you would pass the data and the service would give you back an array
     			// of objects. You would on success set that data to your scope in order
     			// to feed it to the directive. 
-    			console.log("here",item)
     			var data = [];
-    			if(item === 'day'){
+    			if(item.id === 0){
     				data = [
-	    				{pounds:8}, {pounds:12}, {pounds:15}, {pounds:30},
-	    				{pounds:43},{pounds:8}, {pounds:12}, {pounds:15}, 
-	    				{pounds:30}, {pounds:43}
+	    				{value:8}, {value:12}, {value:15}, {value:30},
+	    				{value:43},{value:8}, {value:12}, {value:15}, 
+	    				{value:30}, {value:43}
 	    			]	
-    			}else if(item === 'week'){
+    			}else if(item.id === 1){
     				data = [
-	    				{pounds:10},{pounds:20},{pounds:30},{pounds:10}
+	    				{value:10},{value:20},{value:30},{value:10}
 	    			]	
     			}else{
-    				data = [{pounds:40}]
+    				data = [{value:40}]
     			}
 
     			$scope.updateChart(data);
@@ -33,8 +32,8 @@ angular.module('d3BarApp')
     	},
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-      	var data = [{pounds:8}, {pounds:12}, {pounds:15}, {pounds:30}, 
-      	{pounds:43},{pounds:8}, {pounds:12}, {pounds:15}, {pounds:30}, {pounds:43}];
+      	var data = [{value:8}, {value:12}, {value:15}, {value:30}, 
+      	{value:43},{value:8}, {value:12}, {value:15}, {value:30}, {value:43}];
 
       	var w = 800,
     				h = 300,
@@ -46,7 +45,7 @@ angular.module('d3BarApp')
 				    .attr("height", h);
 
 				var y = d3.scale.linear()
-								.domain([0,d3.max(data,function(num){ return num.pounds})])
+								.domain([0,d3.max(data,function(num){ return num.value})])
 								.rangeRound([0,h])
       	
       	scope.buildChart = function(data){
@@ -55,9 +54,9 @@ angular.module('d3BarApp')
 					    .data(data)
 					  .enter().append("rect")
 					    .attr("x", function(d, i) { return i * (w/data.length); })
-					    .attr("y", function(d) { return h - y(d.pounds) - gutter; })
+					    .attr("y", function(d) { return h - y(d.value) - gutter; })
 					    .attr("width", function(){ return w/data.length - gutter})
-					    .attr("height", function(d) { return y(d.pounds); } );
+					    .attr("height", function(d) { return y(d.value); } );
 
 					// horizontal line for the x-axis
 					chart.append("line")
@@ -66,16 +65,6 @@ angular.module('d3BarApp')
 					     .attr("y1", h - gutter)
 					     .attr("y2", h - gutter)
 					     .style("stroke", "#000");
-
-					var yAxis = d3.svg.axis()
-                  .scale(y)
-                  .orient("left")
-                  .ticks(5);
-
-          chart.append("g")
-				    .attr("class", "axis")
-				    .attr("transform", "translate(" + padding + ",0)")
-				    .call(yAxis);
 
 
       	};
@@ -88,9 +77,9 @@ angular.module('d3BarApp')
       		chart.selectAll("rect")
       				.transition()
 					    .attr("x", function(d, i) { return i * (w/data.length); })
-					    .attr("y", function(d) { return h - y(d.pounds) - gutter; })
+					    .attr("y", function(d) { return h - y(d.value) - gutter; })
 					    .attr("width", function(){ return w/data.length - gutter})
-					    .attr("height", function(d) { return y(d.pounds); } )
+					    .attr("height", function(d) { return y(d.value); } )
       	}
 
       	scope.buildChart(data);

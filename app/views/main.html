@@ -1,9 +1,7 @@
 <div class="row">
 	<div class="span12">
 		<div class="btn-group">
-		  <button class="btn" ng-click="getData('day')">Day</button>
-		  <button class="btn" ng-click="getData('week')">Week</button>
-		  <button class="btn" ng-click="getData('month')">Month</button>
+			<buttton class="btn" ng-repeat="item in btnList" ng-click="getData(item)" ng-bind="item.label"></button>
 		</div>
 	</div>
 </div>
