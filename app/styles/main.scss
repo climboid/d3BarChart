@@ -1,0 +1,21 @@
+@import "compass_twitter_bootstrap";
+
+.bars{
+	fill:red;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.btn-group{
+	margin-bottom:20px;
+}
