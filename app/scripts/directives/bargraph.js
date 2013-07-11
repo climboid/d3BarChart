@@ -74,8 +74,11 @@ angular.module('d3BarApp')
       	// it basically rebinds the chart with the new data
       	//
       	scope.updateChart = function(data){
+          chart.selectAll("rect").remove();
+
       		chart.selectAll("rect")
-      				.transition()
+              .data(data)
+      				.enter().append("rect")
 					    .attr("x", function(d, i) { return i * (w/data.length); })
 					    .attr("y", function(d) { return h - y(d.value) - gutter; })
 					    .attr("width", function(){ return w/data.length - gutter})
