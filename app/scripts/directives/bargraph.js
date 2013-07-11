@@ -6,11 +6,6 @@ angular.module('d3BarApp')
     	controller:function($scope,$element,$http){
     		$scope.switchData = false;
     		$scope.getData = function(item){
-    			//
-    			// here you would do an AJAX call POST to a service
-    			// you would pass the data and the service would give you back an array
-    			// of objects. You would on success set that data to your scope in order
-    			// to feed it to the directive. 
     			var data = [];
     			if(item.id === 0){
     				data = [
